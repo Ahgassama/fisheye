@@ -56,5 +56,31 @@ function mediaFactory(data) {
     return article;
   }
 
-  return { getMediaCardDOM };
+  function sortMediaCardDOM() {
+    const menu = document.createElement("button");
+    menu.classList.add("menu_button");
+    menu.textContent = "Popularité";
+    let totaLikes = [];
+    let totalDates = [];
+    let totalTitles = [];
+    for (let t = 0; t < data.length; t++) {
+      let onelike = data[t].likes;
+      let onedate = data[t].date;
+      let oneTitle = data[t].title;
+      totaLikes.push(onelike);
+      totalDates.push(onedate);
+      totalTitles.push(oneTitle);
+    }
+    totaLikes.sort((a, b) => b - a);
+    totalDates.sort((a, b) => a - b);
+    totalTitles.sort(function (a, b) {
+      return a.localeCompare(b);
+    });
+    console.log(totaLikes);
+    console.log(totalDates);
+    console.log(totalTitles);
+    return menu;
+  }
+
+  return { getMediaCardDOM, sortMediaCardDOM };
 }

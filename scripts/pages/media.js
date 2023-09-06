@@ -17,62 +17,40 @@ async function getMedia(photographerId) {
 
 async function displayData(medias) {
   console.log(medias);
+
+  /*medias.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+  console.log(medias);*/
+  /*medias.sort((a, b) => (a.title > b.title ? 1 : -1));
+  console.log(medias);*/
+  medias.sort((a, b) => (a.date < b.date ? 1 : -1));
+  console.log(medias);
   const mediaSection = document.getElementById("medias");
+
   console.log(mediaSection);
-  let updateLike = [];
-  for (let t = 0; t < medias.length; t++) {
-    let onelike = medias[t].likes;
-    updateLike.push(onelike);
-    console.log(updateLike);
-    console.log(onelike);
-  }
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  let updateTotal = updateLike.reduce(reducer, 0);
-  console.log(updateTotal);
   medias.forEach((medias) => {
     const mediaModel = mediaFactory(medias);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
     mediaSection.appendChild(mediaCardDOM);
-    /*const spanlike = document.querySelectorAll(".like");
-    console.log(spanlike);
-    let like = medias.likes;
-    console.log(like);
-    const totalLikes = document.querySelector(".totalLikes");
-    console.log(totalLikes);
-    const footer = document.querySelector("footer");
-    console.log(footer);
-    const ticket = document.querySelector(".ticket");
-    console.log(ticket);
-    let clic = false;
-    spanlike.forEach((spanlike) => {
-      spanlike.addEventListener("click", () => {
-        if (clic) {
-          clic = false;
-          updateTotal--;
-          console.log(updateTotal);
-        } else {
-          clic = true;
-          updateTotal++;
-          console.log(updateTotal);
-        }
-      });
-    });*/
   });
+}
+
+async function sortData(medias) {
+  const main = document.getElementById("main");
+  console.log(main);
+  const mediaModel = mediaFactory(medias);
+  const menuCardDOM = mediaModel.sortMediaCardDOM();
+  main.appendChild(menuCardDOM);
 }
 
 const footer = document.querySelector("footer");
 console.log(footer);
-async function initlike(medias) {
-  const spanlike = document.querySelectorAll(".like");
-  console.log(spanlike);
-}
+
 async function init() {
   // Récupère les datas des photographes
 
   const medias = await getMedia(photographerId);
-
+  sortData(medias);
   displayData(medias);
-  //likesDislikes(medias);
 }
 
 init();
@@ -104,3 +82,51 @@ init();
       lightbox.style.display = "none";
     });
   }*/
+/*const spanlike = document.querySelectorAll(".like");
+    console.log(spanlike);
+    let like = medias.likes;
+    console.log(like);
+    const totalLikes = document.querySelector(".totalLikes");
+    console.log(totalLikes);
+    const footer = document.querySelector("footer");
+    console.log(footer);
+    const ticket = document.querySelector(".ticket");
+    console.log(ticket);
+    let clic = false;
+    spanlike.forEach((spanlike) => {
+      spanlike.addEventListener("click", () => {
+        if (clic) {
+          clic = false;
+          updateTotal--;
+          console.log(updateTotal);
+        } else {
+          clic = true;
+          updateTotal++;
+          console.log(updateTotal);
+        }
+      });
+    });*/
+/*let totaLikes = [];
+  let totalDates = [];
+  let totalTitles = [];
+  for (let t = 0; t < medias.length; t++) {
+    let onelike = medias[t].likes;
+    let onedate = medias[t].date;
+    let oneTitle = medias[t].title;
+    totaLikes.push(onelike);
+    totalDates.push(onedate);
+    totalTitles.push(oneTitle);
+  }
+  totaLikes.sort((a, b) => b - a);
+  totalDates.sort((a, b) => a - b);
+  totalTitles.sort(function (a, b) {
+    return a.localeCompare(b);
+  });
+  console.log(totaLikes);
+  console.log(totalDates);
+  console.log(totalTitles);
+
+  let maxLike = Math.max(...totaLikes);
+  console.log(maxLike);
+  let minLike = Math.min(...totaLikes);
+  console.log(minLike);*/

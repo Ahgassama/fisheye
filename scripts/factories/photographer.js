@@ -69,6 +69,7 @@ function photographerFactory(data) {
       console.log(totalikes);
       console.log(morelike);
     }
+
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let mainTotalLikes = totalikes.reduce(reducer, 0);
     console.log(mainTotalLikes);
